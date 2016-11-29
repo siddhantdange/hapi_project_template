@@ -1,0 +1,14 @@
+language: node_js
+sudo: false
+node_js:
+  - 5
+env:
+  - NODE_ENV="test"
+before_script:
+  - createuser template_user
+  - createdb -O template_user template_test
+  - npm run db:migrate
+script:
+  - npm test
+  - npm run enforce
+  - npm run lint
